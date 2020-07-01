@@ -38,10 +38,12 @@
         let time=document.querySelector("#time");
         let combo=document.querySelector("#combo");
         let sec=0, count=0;
+        let Gopher=document.querySelectorAll(".Gopher")
+        let beY=new Array();
         function startGame() {
             btn.removeEventListener("click",startGame);
             for (let i = 0; i < 9; i++) {               
-                document.querySelectorAll(".Gopher")[i].src="./img/1-01.gif";
+                Gopher[i].src="./img/1-01.gif";
             }
             sec=60, count=0;
             time.textContent=`剩餘時間：${sec}s`;
@@ -52,7 +54,7 @@
                 clearInterval(timeRun);
                 btn.addEventListener("click",startGame);
                 for (let i = 0; i < 9; i++) {               
-                document.querySelectorAll(".Gopher")[i].src="./img/1-01.png";
+                Gopher[i].src="./img/1-01.png";
             }
             }else{
                     sec--;
@@ -71,29 +73,29 @@
 
         }     
         function showIt(which,delay,j) {
-            console.log(which,delay,j)
-            if(document.querySelector(`.Gopher0${which}`).title!="red"){
+            if(Gopher[which].title!="yellow"){
                 // let newwhich=(which+1)%9;
                 let newwhich=Math.floor(Math.random()*9);
-                console.log('HH');
                 setTimeout(() => {
                     showIt(newwhich,delay,j);              
                 }, 100);
             }else{
-                document.querySelector(`.Gopher0${which}`).src="./img/1-02.gif";
-                document.querySelector(`.Gopher0${which}`).setAttribute('title',"red");
-                document.querySelector(`.Gopher0${which}`).setAttribute('class', `Gopher0${which} Gopher red`)
-                setTimeout(() => {
-                document.querySelector(`.Gopher0${which}`).src="./img/1-01.gif";
-                document.querySelector(`.Gopher0${which}`).setAttribute('title',"yellow");
-                document.querySelector(`.Gopher0${which}`).setAttribute('class', `Gopher0${which} Gopher yellow`) 
+                Gopher[which].src="./img/1-02.gif";
+                Gopher[which].setAttribute('title',"red");
+                Gopher[which].setAttribute('class', `Gopher0${which} Gopher red`)
+                Gopher[which].setAttribute('alt',j);
+
+                beY[j]=setTimeout(() => {         
+                    Gopher[which].src="./img/1-01.gif";
+                    Gopher[which].setAttribute('title',"yellow");
+                    Gopher[which].setAttribute('class', `Gopher0${which} Gopher yellow`) 
+  
                 }, delay*1000);
             }
 
         }
         document.onkeydown=kbCode;
         function kbCode() {
-            console.log(event.keyCode);
             switch (event.keyCode) {
                 case 103: getCount(0); break;
                 case 104: getCount(1); break;
@@ -116,12 +118,21 @@
             }
         }
         function getCount(e) {
-            if(document.querySelector(`.Gopher0${e}`).title=="red"){
+            if(Gopher[e].title=="red"){
                 count++;
                 combo.textContent=`成績分數：${count}`;
-                document.querySelector(`.Gopher0${e}`).src="./img/1-03.gif";
-                document.querySelector(`.Gopher0${e}`).setAttribute('class', `Gopher0${e} Gopher green`);
-                document.querySelector(`.Gopher0${e}`).setAttribute('title',"green");
+                Gopher[e].src="./img/1-03.gif";
+                Gopher[e].setAttribute('class', `Gopher0${e} Gopher green`);
+                Gopher[e].setAttribute('title',"green");
+
+                setTimeout(() => {
+                Gopher[e].src="./img/1-01.gif";
+                Gopher[e].setAttribute('title',"yellow");
+                Gopher[e].setAttribute('class', `Gopher0${e} Gopher yellow`)    
+                }, 1000);
+                let id=Gopher[e].alt;
+                clearTimeout(beY[id]);
+                Gopher[e].alt=null;
             }
         }
     </script>
