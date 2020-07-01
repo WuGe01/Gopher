@@ -1,0 +1,33 @@
+.Gopher-home{
+    margin: auto;
+    margin-top: 20vh;
+}
+.center{
+    text-align: center;
+}
+.flex{
+    display: flex;
+    justify-content: center;
+}
+.Gopher{
+    border: 5px solid #777;
+}
+*{
+    font-family: "微軟正黑體",Arial, Helvetica, sans-serif;
+}
+.control{
+    display: flex;
+    justify-content: space-around;
+    width: 350px;
+    margin: auto;
+    align-items: center;
+}
+.red{
+    background-color: lightcoral;
+}
+.yellow{
+    background-color: lemonchiffon;
+}
+.green{
+    background-color: greenyellow;
+}

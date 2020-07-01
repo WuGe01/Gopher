@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="mystyle.css">
+    <title>打地鼠小遊戲(睡飽就吃 吃飽就睡的貓熊)</title>
+</head>
+<body>
+    <div class="Gopher-home">
+        <div class="flex"><img class="Gopher01 Gopher yellow" src="./img/1-01.gif"><img class="Gopher02 Gopher yellow" src="./img/1-01.gif"><img class="Gopher03 Gopher yellow" src="./img/1-01.gif"></div>
+        <div class="flex"><img class="Gopher04 Gopher yellow" src="./img/1-01.gif"><img class="Gopher05 Gopher yellow" src="./img/1-01.gif"><img class="Gopher06 Gopher yellow" src="./img/1-01.gif"></div>
+        <div class="flex"><img  class="Gopher07 Gopher yellow" src="./img/1-01.gif"><img class="Gopher08 Gopher yellow" src="./img/1-01.gif"><img class="Gopher09 Gopher yellow" src="./img/1-01.gif"></div>     
+    </div>
+    <div class="center" style="margin-top: 10px;">
+        <div class="control">
+            <span id="time">剩餘時間：0s</span>
+            <button style="padding: 5px;font-size: larger;" >遊戲開始</button>
+            <span id="combo">成績分數：0</span>
+        </div>
+        <hr style="width: 350px;margin-top: 10px;">
+        <strong>遊戲說明</strong>
+        <p style="width: 350px;margin: auto;margin-top: 10px;">打地鼠遊戲，遊戲開始時請使用鍵盤數字區，點擊畫面相對位置隻紅色圖片進行得分(滿分100分)</p>
+        <hr style="width: 350px;">
+    </div>
+    <script>
+        let btn =document.querySelector("button");
+        btn.addEventListener("click",startGame);
+        let time=document.querySelector("#time");
+        let combo=document.querySelector("#combo");
+        let sec=0, count=0;
+        function startGame() {
+            btn.removeEventListener("click",startGame);
+            sec=60, count=0;
+            time.textContent=`剩餘時間：${sec}s`;
+            combo.textContent=`成績分數：${count}`;
+            
+            let timeRun=setInterval(() => {
+            if(sec==0){
+                clearInterval(timeRun);
+                btn.addEventListener("click",startGame);
+            }else{
+                    sec--;
+                    time.textContent=`剩餘時間：${sec}s`;
+                }
+            }, 1000);
+                
+
+        }
+        
+    </script>
+</body>
+</html>
