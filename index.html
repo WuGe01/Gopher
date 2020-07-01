@@ -8,9 +8,18 @@
 </head>
 <body>
     <div class="Gopher-home">
-        <div class="flex"><img class="Gopher01 Gopher yellow" src="./img/1-01.gif"><img class="Gopher02 Gopher yellow" src="./img/1-01.gif"><img class="Gopher03 Gopher yellow" src="./img/1-01.gif"></div>
-        <div class="flex"><img class="Gopher04 Gopher yellow" src="./img/1-01.gif"><img class="Gopher05 Gopher yellow" src="./img/1-01.gif"><img class="Gopher06 Gopher yellow" src="./img/1-01.gif"></div>
-        <div class="flex"><img  class="Gopher07 Gopher yellow" src="./img/1-01.gif"><img class="Gopher08 Gopher yellow" src="./img/1-01.gif"><img class="Gopher09 Gopher yellow" src="./img/1-01.gif"></div>     
+        <div class="flex">
+            <img title="yellow" class="Gopher00 Gopher yellow" src="./img/1-01.png">
+            <img title="yellow" class="Gopher01 Gopher yellow" src="./img/1-01.png">
+            <img title="yellow" class="Gopher02 Gopher yellow" src="./img/1-01.png"></div>
+        <div class="flex">
+            <img title="yellow" class="Gopher03 Gopher yellow" src="./img/1-01.png">
+            <img title="yellow" class="Gopher04 Gopher yellow" src="./img/1-01.png">
+            <img title="yellow" class="Gopher05 Gopher yellow" src="./img/1-01.png"></div>
+        <div class="flex">
+            <img  title="yellow" class="Gopher06 Gopher yellow" src="./img/1-01.png">
+            <img title="yellow" class="Gopher07 Gopher yellow" src="./img/1-01.png">
+            <img title="yellow" class="Gopher08 Gopher yellow" src="./img/1-01.png"></div>     
     </div>
     <div class="center" style="margin-top: 10px;">
         <div class="control">
@@ -31,6 +40,9 @@
         let sec=0, count=0;
         function startGame() {
             btn.removeEventListener("click",startGame);
+            for (let i = 0; i < 9; i++) {               
+                document.querySelectorAll(".Gopher")[i].src="./img/1-01.gif";
+            }
             sec=60, count=0;
             time.textContent=`剩餘時間：${sec}s`;
             combo.textContent=`成績分數：${count}`;
@@ -39,15 +51,79 @@
             if(sec==0){
                 clearInterval(timeRun);
                 btn.addEventListener("click",startGame);
+                for (let i = 0; i < 9; i++) {               
+                document.querySelectorAll(".Gopher")[i].src="./img/1-01.png";
+            }
             }else{
                     sec--;
                     time.textContent=`剩餘時間：${sec}s`;
                 }
             }, 1000);
-                
+             
+            for (let j = 0; j < 100; j++) {
+                let which=Math.floor(Math.random()*9);
+                let onTime=Math.floor(Math.random()*55001);
+                let delay=Math.floor(Math.random()*3)+2;
+                setTimeout(()=>{
+                    showIt(which,delay,j);
+                }, onTime);                
+            }
+
+        }     
+        function showIt(which,delay,j) {
+            console.log(which,delay,j)
+            if(document.querySelector(`.Gopher0${which}`).title!="red"){
+                // let newwhich=(which+1)%9;
+                let newwhich=Math.floor(Math.random()*9);
+                console.log('HH');
+                setTimeout(() => {
+                    showIt(newwhich,delay,j);              
+                }, 100);
+            }else{
+                document.querySelector(`.Gopher0${which}`).src="./img/1-02.gif";
+                document.querySelector(`.Gopher0${which}`).setAttribute('title',"red");
+                document.querySelector(`.Gopher0${which}`).setAttribute('class', `Gopher0${which} Gopher red`)
+                setTimeout(() => {
+                document.querySelector(`.Gopher0${which}`).src="./img/1-01.gif";
+                document.querySelector(`.Gopher0${which}`).setAttribute('title',"yellow");
+                document.querySelector(`.Gopher0${which}`).setAttribute('class', `Gopher0${which} Gopher yellow`) 
+                }, delay*1000);
+            }
 
         }
-        
+        document.onkeydown=kbCode;
+        function kbCode() {
+            console.log(event.keyCode);
+            switch (event.keyCode) {
+                case 103: getCount(0); break;
+                case 104: getCount(1); break;
+                case 105: getCount(2); break;
+                case 100: getCount(3); break;
+                case 101: getCount(4); break;
+                case 102: getCount(5); break;
+                case 97:  getCount(6);  break;
+                case 98:  getCount(7);  break;
+                case 99:  getCount(8);  break;
+                case 36: getCount(0); break;
+                case 38: getCount(1); break;
+                case 33: getCount(2); break;
+                case 37: getCount(3); break;
+                case 12: getCount(4); break;
+                case 39: getCount(5); break;
+                case 35:  getCount(6);  break;
+                case 40:  getCount(7);  break;
+                case 34:  getCount(8);  break;
+            }
+        }
+        function getCount(e) {
+            if(document.querySelector(`.Gopher0${e}`).title=="red"){
+                count++;
+                combo.textContent=`成績分數：${count}`;
+                document.querySelector(`.Gopher0${e}`).src="./img/1-03.gif";
+                document.querySelector(`.Gopher0${e}`).setAttribute('class', `Gopher0${e} Gopher green`);
+                document.querySelector(`.Gopher0${e}`).setAttribute('title',"green");
+            }
+        }
     </script>
 </body>
 </html>
