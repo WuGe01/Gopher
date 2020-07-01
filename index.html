@@ -9,27 +9,27 @@
 <body>
     <div class="Gopher-home">
         <div class="flex">
-            <img title="yellow" class="Gopher00 Gopher yellow" src="./img/1-01.png">
-            <img title="yellow" class="Gopher01 Gopher yellow" src="./img/1-01.png">
-            <img title="yellow" class="Gopher02 Gopher yellow" src="./img/1-01.png"></div>
+            <img title="yellow" class="Gopher yellow" onclick="getCount(0)" src="./img/1-01.png">
+            <img title="yellow" class="Gopher yellow" onclick="getCount(1)" src="./img/1-01.png">
+            <img title="yellow" class="Gopher yellow" onclick="getCount(2)" src="./img/1-01.png"></div>
         <div class="flex">
-            <img title="yellow" class="Gopher03 Gopher yellow" src="./img/1-01.png">
-            <img title="yellow" class="Gopher04 Gopher yellow" src="./img/1-01.png">
-            <img title="yellow" class="Gopher05 Gopher yellow" src="./img/1-01.png"></div>
+            <img title="yellow" class="Gopher yellow" onclick="getCount(3)" src="./img/1-01.png">
+            <img title="yellow" class="Gopher yellow" onclick="getCount(4)" src="./img/1-01.png">
+            <img title="yellow" class="Gopher yellow" onclick="getCount(5)" src="./img/1-01.png"></div>
         <div class="flex">
-            <img  title="yellow" class="Gopher06 Gopher yellow" src="./img/1-01.png">
-            <img title="yellow" class="Gopher07 Gopher yellow" src="./img/1-01.png">
-            <img title="yellow" class="Gopher08 Gopher yellow" src="./img/1-01.png"></div>     
+            <img  title="yellow" class="Gopher yellow" onclick="getCount(6)" src="./img/1-01.png">
+            <img title="yellow" class="Gopher yellow" onclick="getCount(7)" src="./img/1-01.png">
+            <img title="yellow" class="Gopher yellow" onclick="getCount(8)" src="./img/1-01.png"></div>     
     </div>
     <div class="center" style="margin-top: 10px;">
         <div class="control">
-            <span id="time">剩餘時間：0s</span>
+            <span id="time" class="t_w">剩餘時間：0s</span>
             <button style="padding: 5px;font-size: larger;" >遊戲開始</button>
-            <span id="combo">成績分數：0</span>
+            <span id="combo" class="t_w">成績分數：0</span>
         </div>
         <hr style="width: 350px;margin-top: 10px;">
-        <strong>遊戲說明</strong>
-        <p style="width: 350px;margin: auto;margin-top: 10px;">打地鼠遊戲，遊戲開始時請使用鍵盤數字區，點擊畫面相對位置隻紅色圖片進行得分(滿分100分)</p>
+        <strong class="t_w">遊戲說明</strong>
+        <p style="width: 350px;margin: auto;margin-top: 10px;" class="t_w">打地鼠遊戲，遊戲開始時請使用鍵盤數字區，點擊畫面相對位置隻紅色圖片進行得分(滿分100分)</p>
         <hr style="width: 350px;">
     </div>
     <script>
@@ -82,13 +82,13 @@
             }else{
                 Gopher[which].src="./img/1-02.gif";
                 Gopher[which].setAttribute('title',"red");
-                Gopher[which].setAttribute('class', `Gopher0${which} Gopher red`)
+                Gopher[which].setAttribute('class',"Gopher red")
                 Gopher[which].setAttribute('alt',j);
 
                 beY[j]=setTimeout(() => {         
                     Gopher[which].src="./img/1-01.gif";
                     Gopher[which].setAttribute('title',"yellow");
-                    Gopher[which].setAttribute('class', `Gopher0${which} Gopher yellow`) 
+                    Gopher[which].setAttribute('class',"Gopher yellow") 
   
                 }, delay*1000);
             }
@@ -122,13 +122,13 @@
                 count++;
                 combo.textContent=`成績分數：${count}`;
                 Gopher[e].src="./img/1-03.gif";
-                Gopher[e].setAttribute('class', `Gopher0${e} Gopher green`);
+                Gopher[e].setAttribute('class',"Gopher green");
                 Gopher[e].setAttribute('title',"green");
 
                 setTimeout(() => {
                 Gopher[e].src="./img/1-01.gif";
                 Gopher[e].setAttribute('title',"yellow");
-                Gopher[e].setAttribute('class', `Gopher0${e} Gopher yellow`)    
+                Gopher[e].setAttribute('class',"Gopher yellow")    
                 }, 1000);
                 let id=Gopher[e].alt;
                 clearTimeout(beY[id]);
